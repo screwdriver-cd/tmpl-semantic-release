@@ -1,7 +1,7 @@
 name: screwdriver-cd/semantic-release
 version: '1.0'
 description: Template for semantic release
-maintainer: idk
+maintainer: daolam112@gmail.com
 config:
   image: node:6
   steps:
