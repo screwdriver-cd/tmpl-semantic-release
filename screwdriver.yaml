@@ -3,11 +3,11 @@ workflow:
 
 shared:
   image: node:6
+  environment:
+    SD_TEMPLATE_PATH: semantic_release_template.yaml
 
 jobs:
   main:
-    environment:
-      SD_TEMPLATE_PATH: semantic_release_template.yaml
     steps:
     - install_binaries: npm i -g screwdriver-template-main
     - verify_template: template-validate
