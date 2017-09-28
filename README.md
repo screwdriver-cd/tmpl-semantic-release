@@ -1,4 +1,5 @@
 # Template: Semantic Release
+[![Build Status][status-image]][status-url]
 
 A template that performs a semantic-release for NPM-based modules, using the [semantic-release](https://www.npmjs.com/package/semantic-release) NPM module.
 
@@ -46,3 +47,6 @@ Overriding this step may cause unwanted side effects during the publish.
 #### publish
 
 This step is what performs the semantic release operations via the [semantic-release](https://www.npmjs.com/package/semantic-release) NPM module.
+
+[status-image]: https://cd.screwdriver.cd/pipelines/344/badge
+[status-url]: https://cd.screwdriver.cd/pipelines/344
