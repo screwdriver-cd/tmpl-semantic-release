@@ -9,4 +9,4 @@ config:
         if [ -z "$NPM_TOKEN" ]; then echo "NPM Token not set to NPM_TOKEN. Exiting..." && exit 1; fi
         if [ -z "$GH_TOKEN" ]; then echo "Github Token not set to GH_TOKEN. Exiting..." && exit 1; fi
     - install_binaries: npm i --no-save semantic-release@^7
-    - publish: semantic-release pre && npm publish && semantic-release post
+    - publish: ./node_modules/.bin/semantic-release pre && npm publish && ./node_modules/.bin/semantic-release post
