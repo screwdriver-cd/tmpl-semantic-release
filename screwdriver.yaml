@@ -1,20 +1,35 @@
-workflow:
-- publish
-
 shared:
   image: node:6
-  environment:
-    SD_TEMPLATE_PATH: semantic_release_template.yaml
 
 jobs:
   main:
+    requires: [~pr, ~commit]
     steps:
     - install_binaries: npm i -g screwdriver-template-main
-    - verify_template: template-validate
-  publish:
+    - verify_node6: |
+        export SD_TEMPLATE_PATH=semantic_release_template.yaml
+        template-validate
+    - verify_node8: |
+        export SD_TEMPLATE_PATH=semantic_release_template_node8.yaml
+        template-validate
+  publish-node6:
+    requires: [main]
+    environment:
+      SD_TEMPLATE_PATH: semantic_release_template.yaml
     steps:
     - install_binaries: npm i -g screwdriver-template-main
     - publish_template: template-publish | tee $SD_ARTIFACTS_DIR/publish.output
     - save_version: cat $SD_ARTIFACTS_DIR/publish.output | awk -F[@\ ] '{print $3}' | tee $SD_ARTIFACTS_DIR/template_version
     - tag_latest: template-tag --name screwdriver-cd/semantic-release --version `cat $SD_ARTIFACTS_DIR/template_version` --tag latest
     - tag_stable: template-tag --name screwdriver-cd/semantic-release --version `cat $SD_ARTIFACTS_DIR/template_version` --tag stable
+  publish-node8:
+    requires: [main]
+    image: node:8
+    environment:
+      SD_TEMPLATE_PATH: semantic_release_template_node8.yaml
+    steps:
+    - install_binaries: npm i -g screwdriver-template-main
+    - publish_template: template-publish | tee $SD_ARTIFACTS_DIR/publish_node8.output
+    - save_version: cat $SD_ARTIFACTS_DIR/publish_node8.output | awk -F[@\ ] '{print $3}' | tee $SD_ARTIFACTS_DIR/template_version_node8
+    - tag_latest: template-tag --name screwdriver-cd/semantic-release-node8 --version `cat $SD_ARTIFACTS_DIR/template_version_node8` --tag latest
+    - tag_stable: template-tag --name screwdriver-cd/semantic-release-node8 --version `cat $SD_ARTIFACTS_DIR/template_version_node8` --tag stable
