@@ -1,9 +1,9 @@
 name: screwdriver-cd/semantic-release
-version: '1.0'
+version: '2.0'
 description: Template for semantic release with Node 10 or higher
-maintainer: daolam112@gmail.com
+maintainer: screwdriver-oss@yahooinc.com
 config:
-  image: node:6
+  image: node:12
   steps:
     - check_prerequisite: |
         if [ -z "$NPM_TOKEN" ]; then echo "NPM Token not set to NPM_TOKEN. Exiting..." && exit 1; fi
