@@ -1,18 +1,18 @@
 shared:
-  image: node:6
+  image: node:12
 
 jobs:
   main:
     requires: [~pr, ~commit]
     steps:
     - install_binaries: npm i -g screwdriver-template-main
-    - verify_node6: |
+    - verify_node12: |
         export SD_TEMPLATE_PATH=semantic_release_template.yaml
         template-validate
     - verify_node8: |
         export SD_TEMPLATE_PATH=semantic_release_template_node8.yaml
         template-validate
-  publish-node6:
+  publish-node12:
     requires: [main]
     environment:
       SD_TEMPLATE_PATH: semantic_release_template.yaml

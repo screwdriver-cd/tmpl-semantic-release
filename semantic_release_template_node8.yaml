@@ -1,7 +1,7 @@
 name: screwdriver-cd/semantic-release-node8
 version: '1.0'
 description: Template for semantic release using node8 image
-maintainer: tiffanykyi@gmail.com
+maintainer: screwdriver-oss@yahooinc.com
 config:
   image: node:8
   steps:
