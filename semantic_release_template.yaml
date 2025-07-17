@@ -7,6 +7,6 @@ config:
   steps:
     - check_prerequisite: |
         if [ -z "$NPM_TOKEN" ]; then echo "NPM Token not set to NPM_TOKEN. Exiting..." && exit 1; fi
-        if [ -z "$GH_TOKEN" ]; then echo "Github Token not set to GH_TOKEN. Exiting..." && exit 1; fi
+        if [[ -z "$GITHUB_TOKEN" && -z "$GH_TOKEN" ]]; then echo "Github Token not set to either GITHUB_TOKEN or GH_TOKEN. Exiting..." && exit 1; fi
     - install_binaries: npm i --no-save semantic-release@^22
     - publish: ./node_modules/.bin/semantic-release
