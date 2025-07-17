@@ -1,12 +1,12 @@
 name: screwdriver-cd/semantic-release
-version: '2.0'
-description: Template for semantic release with Node 10 or higher
+version: '3.0'
+description: Template for semantic release with Node 18 or higher
 maintainer: screwdriver-oss@yahooinc.com
 config:
-  image: node:12
+  image: node:18
   steps:
     - check_prerequisite: |
         if [ -z "$NPM_TOKEN" ]; then echo "NPM Token not set to NPM_TOKEN. Exiting..." && exit 1; fi
         if [ -z "$GH_TOKEN" ]; then echo "Github Token not set to GH_TOKEN. Exiting..." && exit 1; fi
-    - install_binaries: npm i --no-save semantic-release@^17
+    - install_binaries: npm i --no-save semantic-release@^22
     - publish: ./node_modules/.bin/semantic-release
